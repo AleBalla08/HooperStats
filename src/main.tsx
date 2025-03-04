@@ -10,7 +10,7 @@ const Main = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/HooperStats/" element={<App />} />
         <Route path="/singleSession/:sessionId" element={<SingleSession />} /> 
         <Route path="/profile" element={<Profile/>}/>
       </Routes>
