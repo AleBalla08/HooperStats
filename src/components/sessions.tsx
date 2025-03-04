@@ -13,7 +13,7 @@ function Sessions({sessions, removeSessions}:SessionProps){
   const navigate = useNavigate();
 
   const showSingleSession = (sessionId: string)=>{
-        navigate(`hooper_stats/single_session/${sessionId}`)
+        navigate(`/HooperStats/singleSession/${sessionId}`)
   }
 
     return (
