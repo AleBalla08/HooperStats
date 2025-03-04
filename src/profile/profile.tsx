@@ -45,7 +45,7 @@ function Profile() {
                     <div className='done_session_exer'>
                         {lastDoneSession ? (
                         <div className="done_session_exer">
-                            <h3>{lastDoneSession.name || "Treino Sem Nome"}</h3>
+                            <h3>{lastDoneSession.name + " - " + lastDoneSession.duration + " Segundos de duração"}</h3>
                             <ul>
                                 {lastDoneSession.exercises?.map((exercise: any, index: number) => (
                                     <li key={index}>

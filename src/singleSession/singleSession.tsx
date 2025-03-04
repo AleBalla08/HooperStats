@@ -129,7 +129,7 @@ function SingleSessionContent() {
       name: session.name,
       exercises: session.exercises.map((exercise) => ({
         ...exercise,
-        checked: true, 
+        checked: true,
       })),
       duration: time,
     };
@@ -148,6 +148,14 @@ function SingleSessionContent() {
     setSession(resetSession);
   
     console.log("Sessão finalizada e salva em 'doneSessions':", newSession);
+
+    Swal.fire({
+      title: "Sessão salva com sucesso!",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {
+      window.location.href = "/HooperStats/profile"; 
+    });
   }
   
 
