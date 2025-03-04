@@ -11,8 +11,8 @@ const Main = () => {
     <Router>
       <Routes>
         <Route path="/HooperStats/" element={<App />} />
-        <Route path="/singleSession/:sessionId" element={<SingleSession />} /> 
-        <Route path="/profile/" element={<Profile/>}/>
+        <Route path="/HooperStats/singleSession/:sessionId" element={<SingleSession />} /> 
+        <Route path="/HooperStats/profile/" element={<Profile/>}/>
       </Routes>
     </Router>
   );

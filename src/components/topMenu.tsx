@@ -49,7 +49,7 @@ function TopMenu(){
                         </a>
                     </li>
                     <li>
-                        <a href="/profile/" >
+                        <a href="/HooperStats/profile/" >
                             Perfil
                             <i className="fa-solid fa-user"></i>
                         </a>
