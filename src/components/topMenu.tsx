@@ -43,13 +43,13 @@ function TopMenu(){
             <div className={`side-menu ${sideMenu ? "toggleSMenu" : ""}`}>
                 <ul className="side-menu__items">
                     <li>
-                        <a href="/"> 
+                        <a href="/HooperStats/"> 
                             Home
                             <i className="fa-solid fa-house"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="/profile" >
+                        <a href="/profile/" >
                             Perfil
                             <i className="fa-solid fa-user"></i>
                         </a>
