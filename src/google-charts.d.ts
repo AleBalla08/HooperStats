@@ -3,10 +3,10 @@ declare namespace google {
 
       export interface DataTable {
         addColumn(type: string, label: string): void;
-        addRows(rows: [string, number | string, { role: string }][]): void; 
+        addRows(rows: [string, number | string]): void; 
       }
   
-      export function arrayToDataTable(data: [string, number | string, { role: string }][]): DataTable;
+      export function arrayToDataTable(data: [string, number | string][]): DataTable;
   
       export class PieChart {
         constructor(element: HTMLElement);
