@@ -9,44 +9,41 @@ function Dashboard() {
       }
 
       const dataPie = window.google.visualization.arrayToDataTable([
-        ["Exercicio", "Reps", { role: "style" }] as [string, string, { role: string }],
-        ["Arremesso - 2pts", 30, { role: "style", color: "#262626" }] as [string, number, { role: string, color: string }],
-        ["Bandeja", 40, { role: "style", color: "#8C8C8C" }] as [string, number, { role: string, color: string }],
-        ["Arremesso - 3pts", 20, { role: "style", color: "#BFBFBF" }] as [string, number, { role: string, color: string }],
-        ["Arremesso - PullUp", 20, { role: "style", color: "#f9f9f9" }] as [string, number, { role: string, color: string }],
+        ["Exercicio", "Reps", { role: "style" }],
+        ["Arremesso - 2pts", 30, "color: #262626"],
+        ["Bandeja", 40, "color: #8C8C8C"],
+        ["Arremesso - 3pts", 20, "color: #BFBFBF"],
+        ["Arremesso - PullUp", 20, "color: #f9f9f9"],
       ]);
 
       const optionsPie = {
         title: "Reps por Exercício",
         backgroundColor: "#262626",
-        borderRadius: 6,
-        colors: ["#262626", "#8C8C8C", "#BFBFBF", "#f9f9f9"],
         titleTextStyle: { color: "#f9f9f9", fontSize: 18 },
         legend: { textStyle: { color: "#f9f9f9" } },
-        pieSliceTextStyle: { color: "#000000" },
       };
 
       const chartPie = new window.google.visualization.PieChart(
         document.getElementById("piechart") as HTMLElement
       );
+
       chartPie.draw(dataPie, optionsPie);
 
       const dataBar = window.google.visualization.arrayToDataTable([
-        ["Treino", "Porcentagem %", { role: "style" }] as [string, string | number, { role: string }],
-        ["Treino C - 24/07", 58, { role: "style", color: "#262626" }] as [string, number, { role: string, color: string }],
-        ["Treino A - 28/05", 56.5, { role: "style", color: "#8C8C8C" }] as [string, number, { role: string, color: string }],
-        ["Treino C - 30/01", 56.4, { role: "style", color: "#BFBFBF" }] as [string, number, { role: string, color: string }],
-        ["Treino B - 18/02", 55, { role: "style", color: "#f9f9f9" }] as [string, number, { role: string, color: string }],
+        ["Treino", "Porcentagem %", { role: "style" }],
+        ["Treino C - 24/07", 58, "color: #262626; stroke-color: #ffffff; stroke-width: 1"],
+        ["Treino A - 28/05", 56.5, "color: #8C8C8C; stroke-color: #ffffff; stroke-width: 1"],
+        ["Treino C - 30/01", 56.4, "color: #BFBFBF; stroke-color: #ffffff; stroke-width: 1"],
+        ["Treino B - 18/02", 55, "color: #f9f9f9; stroke-color: #ffffff; stroke-width: 1"],
       ]);
 
       const optionsBar = {
         title: "Melhores Treinos (%)",
         backgroundColor: "#262626",
-        borderRadius: 6,
-        hAxis: { textStyle: { color: "#f9f9f9" } },
-        vAxis: { textStyle: { color: "#f9f9f9" } },
         titleTextStyle: { color: "#f9f9f9", fontSize: 18 },
         legend: "none",
+        hAxis: { textStyle: { color: "#f9f9f9" } },
+        vAxis: { textStyle: { color: "#f9f9f9" } },
       };
 
       const chartBar = new window.google.visualization.BarChart(
@@ -57,7 +54,7 @@ function Dashboard() {
 
     const loadGoogleCharts = () => {
       if (!window.google || !window.google.charts) {
-        console.error("Google Charts ainda não carregado.");
+        console.error("Google Charts ainda não carregado corretamente.");
         return;
       }
 
@@ -69,7 +66,10 @@ function Dashboard() {
       const script = document.createElement("script");
       script.src = "https://www.gstatic.com/charts/loader.js";
       script.async = true;
-      script.onload = loadGoogleCharts;
+      script.onload = () => {
+        console.log("Google Charts carregado com sucesso.");
+        loadGoogleCharts();
+      };
       document.body.appendChild(script);
     } else {
       loadGoogleCharts();
@@ -82,28 +82,14 @@ function Dashboard() {
     };
   }, []);
 
-
   return (
     <div className="user_activity">
-      <div style={{ 
-          width: "80%", 
-          height: "300px", 
-          marginBottom: "20px", 
-          marginTop: "20px", 
-          borderRadius: "10px", 
-          overflow: "hidden" 
-      }}>
-          <div id="piechart" style={{ width: "100%", height: "100%" }}></div>
+      <div style={{ width: "80%", height: "300px", marginBottom: "20px", marginTop: "20px" }}>
+        <div id="piechart" style={{ width: "100%", height: "100%" }}></div>
       </div>
 
-      <div style={{ 
-          width: "80%", 
-          height: "300px", 
-          marginBottom: "20px",  
-          borderRadius: "10px", 
-          overflow: "hidden" 
-      }}>
-          <div id="barchart" style={{ width: "100%", height: "100%" }}></div>
+      <div style={{ width: "80%", height: "300px", marginBottom: "20px" }}>
+        <div id="barchart" style={{ width: "100%", height: "100%" }}></div>
       </div>
     </div>
   );

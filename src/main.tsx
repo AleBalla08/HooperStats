@@ -8,7 +8,7 @@ import Profile from './profile/profile';
 
 const Main = () => {
   return (
-    <Router basename="/HooperStats">
+    <Router basename="/HooperStats/">
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/singleSession/:sessionId" element={<SingleSession />} /> 

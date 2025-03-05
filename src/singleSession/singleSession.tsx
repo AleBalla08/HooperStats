@@ -110,6 +110,7 @@ function SingleSessionContent() {
     setSession(updatedSession);
   }
 
+
   function endSession() {
     if (!session) return;
   
@@ -129,26 +130,34 @@ function SingleSessionContent() {
       name: session.name,
       exercises: session.exercises.map((exercise) => ({
         ...exercise,
-        checked: true,
+        checked: true, 
       })),
       duration: time,
     };
   
     doneSessions.push(newSession);
     localStorage.setItem("doneSessions", JSON.stringify(doneSessions));
-  
-    const resetSession = {
+
+    const resetSession: Session = {
       ...session,
       exercises: session.exercises.map((exercise) => ({
         ...exercise,
+        makes: 0,
+        percentage: 0,
         checked: false,
       })),
     };
   
+    const storedSessions: Session[] = JSON.parse(localStorage.getItem("sessions") || "[]");
+  
+    const updatedSessions = storedSessions.map((s) => (s.id === session.id ? resetSession : s));
+  
+    localStorage.setItem("sessions", JSON.stringify(updatedSessions));
+  
     setSession(resetSession);
   
     console.log("Sessão finalizada e salva em 'doneSessions':", newSession);
-
+  
     Swal.fire({
       title: "Sessão salva com sucesso!",
       icon: "success",
@@ -157,6 +166,8 @@ function SingleSessionContent() {
       window.location.href = "/HooperStats/profile"; 
     });
   }
+  
+
   
 
   function toggleForm() {
@@ -204,7 +215,7 @@ function SingleSessionContent() {
           {session.exercises.map((exercise, index) => (
             <li className="exercise" key={index}>
               <div className="exercise__title" data-exercise-index={index}>
-                {exercise.name} - {exercise.reps} Reps
+                {exercise.name} - {exercise.reps} Reps | {exercise.makes || ''} acert. - {exercise.percentage+'%' || ''}
               </div>
 
               <label className="custom-checkbox">

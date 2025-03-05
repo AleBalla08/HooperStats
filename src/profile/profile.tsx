@@ -33,7 +33,7 @@ function Profile() {
         <TopMenu/>
         <div className='profile-container'>
             <div className="profile__header">
-                <img src="../media/profile-default.svg" alt="" className="profile__pic" />
+                <img src="./media/profile-default.svg" alt="" className="profile__pic" />
             </div>
             <div className="user_info">
                 <h1 className='username'>Username</h1>
