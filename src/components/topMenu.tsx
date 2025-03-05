@@ -35,6 +35,10 @@ function TopMenu(){
             navigate(`/profile`)
     }
 
+    const showDoneSessions = ()=>{
+        navigate('/workouts')
+    }
+
 
     return (
         <>
@@ -65,9 +69,11 @@ function TopMenu(){
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            Configs.
-                            <i className="fa-solid fa-gear"></i>
+                        <a onClick={(e) =>{
+                            e.preventDefault();
+                            showDoneSessions()}}>
+                            Treinos
+                            <i className="fa-solid fa-person-running"></i>
                         </a>
                     </li>
                     <li className='get-prime'>
