@@ -1,5 +1,6 @@
 import '../comps_styles/appStyles.css'
 import { useEffect, useState } from "react";
+import TopMenu from './topMenu';
 
 function DoneSessions(){
     const [doneSessions, setDoneSessions] = useState<any | null>(null);
@@ -19,6 +20,7 @@ function DoneSessions(){
 
     return (
         <>
+            <TopMenu/>
             <h3 className='done-sessions_title'>Treinos</h3>
             <h5 className='done-sessions-subtitle'>Treinos concluídos aparecerão aqui</h5>
             <ul className='done-sessions_list'>

@@ -6,6 +6,7 @@ import "./SS.css";
 import Timer from "./SScomps/timer";
 import Swal from "sweetalert2";
 import { TimerProvider, useTimer } from "./SScomps/timerContexts";
+import { useNavigate } from "react-router-dom";
 
 function SingleSession() {
   return (
@@ -15,6 +16,9 @@ function SingleSession() {
   );
 }
 
+
+
+
 function SingleSessionContent() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const [session, setSession] = useState<Session | null>(null);
@@ -22,6 +26,7 @@ function SingleSessionContent() {
   const [reps, setReps] = useState<string>("");
   const [makes, setMakes] = useState<string>("");
   const { time, stopTimer } = useTimer(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedSessions = JSON.parse(localStorage.getItem("sessions") || "[]");
@@ -157,13 +162,18 @@ function SingleSessionContent() {
     setSession(resetSession);
   
     console.log("Sessão finalizada e salva em 'doneSessions':", newSession);
-  
+    
+    
+    const showProfile = ()=>{
+            navigate(`/profile`)
+    }
+
     Swal.fire({
       title: "Sessão salva com sucesso!",
       icon: "success",
       confirmButtonText: "OK",
     }).then(() => {
-      window.location.href = "/HooperStats/profile"; 
+      showProfile()
     });
   }
   
