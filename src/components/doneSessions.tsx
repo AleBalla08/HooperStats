@@ -16,6 +16,11 @@ function DoneSessions(){
         setDoneSessions(getDoneSessions());
     }, []);
 
+    const clearDoneSessions = ()=>{
+        localStorage.removeItem('doneSessions')
+        setDoneSessions([])
+    }
+
 
 
     return (
@@ -28,9 +33,12 @@ function DoneSessions(){
                     <li className='donse-sessions_item' key={index}>{session.name} - {session.duration} segundos</li>
                 ))}
             </ul>
-            <div className='limpar-treinos'>
-                <button>Limpar Treinos</button>
-            </div>
+            {doneSessions && ( 
+                <div className="limpar-treinos">
+                    <button onClick={clearDoneSessions}>Limpar Treinos</button>
+                </div>
+            )}
+            
         </>
     )
 }
