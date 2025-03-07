@@ -111,5 +111,61 @@ dashboard */
 }
 
 
+.halfcourt__img {
+    position: relative;
+    width: 90%;
+    border-radius: 4px;
+    background-color: var(--cinza-escuro);
+    height: 250px;
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.halfcourt__img img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.shot-position {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.corner-L { top: 75%; left: 0%; }
+.corner-R { top: 75%; right: 0%; }
+.fortyfive-L { top: 25%; left: 8%; }
+.fortyfive-R { top: 25%; right: 8%; }
+.center { top: 9%; left: 50%; transform: translate(-50%, -50%); }
+.two-corner-L { top: 70%; left: 30%; }
+.two-corner-R { top: 70%; right: 30%; }
+.freethrow { top: 35%; left: 50%; transform: translateX(-50%); }
+
+
+.color_subtitle{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    background-color: var(--cinza-escuro);
+    height: 30px;
+    border-radius: 4px;
+    margin-top: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 18px;
+}
+
+
 
 

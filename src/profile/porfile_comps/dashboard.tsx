@@ -1,4 +1,5 @@
   import { useEffect } from "react";
+import HalfCourt from "./halfcourt";
 
   function Dashboard() {
     useEffect(() => {
@@ -83,9 +84,12 @@
       };
     }, []);
 
+   
+
 
     return (
       <div className="user_activity">
+        <HalfCourt/>
         <div style={{ 
             width: "80%", 
             height: "300px", 
