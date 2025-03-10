@@ -9,6 +9,7 @@ export interface Exercise {
   reps: number;
   makes: number;
   percentage: number;
+  position: string;
 }
 
 export interface Session {

@@ -7,6 +7,7 @@ import Timer from "./SScomps/timer";
 import Swal from "sweetalert2";
 import { TimerProvider, useTimer } from "./SScomps/timerContexts";
 import { useNavigate } from "react-router-dom";
+import { availableExercises } from "./available_exer.ts";
 
 function SingleSession() {
   return (
@@ -22,10 +23,10 @@ function SingleSession() {
 function SingleSessionContent() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const [session, setSession] = useState<Session | null>(null);
-  const [exerciseName, setExerciseName] = useState<string>("");
   const [reps, setReps] = useState<string>("");
   const [makes, setMakes] = useState<string>("");
   const { time, stopTimer } = useTimer(); 
+  const [selectedExercise, setSelectedExercise] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,14 +36,18 @@ function SingleSessionContent() {
   }, [sessionId]);
 
   function addExercise() {
-    if (!session || !exerciseName.trim()) return;
+    if (!session || !selectedExercise) return;
+
+    const exerciseData = availableExercises.find((ex)=> ex.name === selectedExercise);
+    if (!exerciseData) return;
 
     const newExercise: Exercise = {
       checked: false,
-      name: exerciseName,
+      name: exerciseData.name,
       reps: Number(reps),
       makes: Number(makes),
       percentage: reps && makes ? Math.round((Number(makes) / Number(reps)) * 100) : 0,
+      position: exerciseData.position
     };
 
     const updatedSession: Session = {
@@ -56,7 +61,7 @@ function SingleSessionContent() {
     localStorage.setItem("sessions", JSON.stringify(updatedSessions));
     setSession(updatedSession);
 
-    setExerciseName("");
+    setSelectedExercise("");
     setReps("");
     setMakes("");
   }
@@ -204,19 +209,23 @@ function SingleSessionContent() {
       </div>
       <br />
       <div className="form__exercise">
-        <input
-          type="text"
-          placeholder="Nome do exercício"
-          value={exerciseName}
-          onChange={(e) => setExerciseName(e.target.value)}
-        />
+        <select className="exercise-select" value={selectedExercise} onChange={(e) => setSelectedExercise(e.target.value)}>
+          <option value="" disabled>
+            Selecione um exercício
+          </option>
+          {availableExercises.map((exercise) => (
+            <option key={exercise.name} value={exercise.name}>
+              {exercise.name} ({exercise.position})
+            </option>
+          ))}
+        </select>
         <input
           type="number"
           placeholder="Repetições"
           value={reps}
           onChange={(e) => setReps(e.target.value)}
         />
-        <button onClick={addExercise}>Adicionar</button>
+        <button onClick={addExercise} disabled={!selectedExercise}>Adicionar</button>
       </div>
       <br />
       <h2 className="exercises__title">Exercícios:</h2>

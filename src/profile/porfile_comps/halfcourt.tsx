@@ -1,16 +1,67 @@
+// import {useState, useEffect} from 'react'
+import { Session } from '../../components/types';
+
+
 
 export default function HalfCourt() {
 
-  const shotData = [
-    { position: "corner-L", percentage: 45 },
-    { position: "corner-R", percentage: 50 },
-    { position: "fortyfive-L", percentage: 38 },
-    { position: "fortyfive-R", percentage: 42 },
-    { position: "center", percentage: 47 },
-    { position: "two-corner-L", percentage: 55 },
-    { position: "two-corner-R", percentage: 53 },
-    { position: "freethrow", percentage: 90 },
-  ];
+  interface PositionAccuracy {
+    position: string;
+    percentage: number;
+  }
+
+  interface PositionStats {
+    totalMakes: number;
+    totalReps: number;
+  }
+
+  const doneSessions: Session[] = JSON.parse(localStorage.getItem("doneSessions") || "[]");
+
+  function calculatePositionAccuracy(doneSessions: Session[]): PositionAccuracy[] {
+    const positionStats: Record<string, PositionStats> = {};
+  
+    doneSessions.forEach((session) => {
+      session.exercises.forEach((exercise) => {
+        const { position, makes, reps } = exercise;
+  
+        if (!positionStats[position]) {
+          positionStats[position] = { totalMakes: 0, totalReps: 0 };
+        }
+  
+        positionStats[position].totalMakes += makes;
+        positionStats[position].totalReps += reps;
+      });
+    });
+  
+    const positionAccuracy: PositionAccuracy[] = Object.keys(positionStats).map((position) => ({
+      position,
+      percentage:
+        positionStats[position].totalReps > 0
+          ? Math.round((positionStats[position].totalMakes / positionStats[position].totalReps) * 100)
+          : 0,
+    }));
+  
+    return positionAccuracy;
+  }
+
+  const positionAccuracy = calculatePositionAccuracy(doneSessions);
+
+
+
+const shotData = [
+  "corner-L",
+  "corner-R",
+  "fortyfive-L",
+  "fortyfive-R",
+  "center",
+  "two-corner-L",
+  "two-corner-R",
+  "freethrow",
+].map((position) => ({
+  position,
+  percentage:
+    positionAccuracy.find((item) => item.position === position)?.percentage || 0,
+}));
 
   const getCircleColor = (percentage: number) => {
     if (percentage >= 60) return "#A31D1D";
